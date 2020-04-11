@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', 'DashboardController@index');
 
     Route::post('users/change-user-status', 'UserLoginController@changeUserStatus');
+    Route::post('products/change-status', 'ProductController@changeStatus');
+
     Route::get('/courier-drivers/{id}', 'CourierDriverController@viewOrEdit');
 
     Route::post('courier-drivers/add-courier-driver-temp', 'CourierDriverController@addCourierDriverTemp');
@@ -33,8 +35,14 @@ Route::middleware('auth')->group(function () {
     Route::put('courier-drivers/update-courier-driver-temp/{id}', 'CourierDriverController@updateCourierDriverTemp');
     Route::put('courier-drivers/update-courier-driver/{id}', 'CourierDriverController@updateCourierDriver');
 
+    Route::get('product-categories/fetch-product-categories', 'ProductCategoryController@fetchForSelect');
+    Route::get('suppliers/fetch-suppliers', 'SupplierController@fetchForSelect');
+
+    Route::post('product-categories', 'ProductCategoryController@store');
+
     Route::resource('suppliers', 'SupplierController');
     Route::resource('couriers', 'CourierController');
+    Route::resource('products', 'ProductController');
     Route::post('/logout', 'LoginController@logout')->name('logout');
 
 

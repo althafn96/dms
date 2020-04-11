@@ -130,4 +130,27 @@ class SupplierController extends Controller
             'text' => 'supplier removed successfully'
         ]);
     }
+
+    public function fetchForSelect(Request $request)
+    {
+
+        if ($request->has('search')) {
+            $suppliers = DB::table('suppliers')
+                ->join('users', 'users.id', '=', 'suppliers.user_id')
+                ->join('user_logins', 'user_logins.user_id', '=', 'users.id')
+                ->where('user_logins.status', '1')
+                ->where('title', 'like', '%' . $request->search . '%')
+                ->select('suppliers.id', 'users.fname')
+                ->get();
+        } else {
+            $suppliers = DB::table('suppliers')
+                ->join('users', 'users.id', '=', 'suppliers.user_id')
+                ->join('user_logins', 'user_logins.user_id', '=', 'users.id')
+                ->where('user_logins.status', '1')
+                ->select('suppliers.id', 'users.fname')
+                ->get();
+        }
+
+        return $suppliers;
+    }
 }

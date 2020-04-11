@@ -34,10 +34,10 @@ function submitFormNoImage(form, url, btn, type, loadUrl = null) {
                         location.reload();
                     }, 1000);
                 } else if (loadUrl == "none") {
-                    dtTable.ajax.reload();
                     btn.removeClass(
                         "kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light"
                     ).removeAttr("disabled");
+                    dtTable.ajax.reload();
                 } else {
                     setTimeout(() => {
                         window.location.href = loadUrl;

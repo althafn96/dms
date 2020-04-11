@@ -7,77 +7,71 @@ use Illuminate\Http\Request;
 
 class ProductCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function fetchForSelect(Request $request)
+    {
+        $product_categories = array();
+
+        if ($request->has('search')) {
+            $product_categories_in_table = ProductCategory::where('title', 'like', '%' . $request->search . '%')->get();
+        } else {
+            $product_categories_in_table = ProductCategory::get();
+        }
+
+        foreach ($product_categories_in_table as $category) {
+            array_push($product_categories, $category);
+        }
+
+        $add_category_btn = array('title' => '➕ Add Category', 'id' => '-1');
+        array_push($product_categories, $add_category_btn);
+
+        return $product_categories;
+    }
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        if ($request->category_title == '') {
+            return response()->json([
+                'type' => 'Error',
+                'text' => 'category title cant be empty'
+            ]);
+        }
+
+        $category = new ProductCategory;
+        $category->title = $request->category_title;
+        $category->save();
+
+        return response()->json([
+            'type' => 'Success',
+            'text' => 'product category added successfully'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
-     */
     public function show(ProductCategory $productCategory)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
-     */
     public function edit(ProductCategory $productCategory)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, ProductCategory $productCategory)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(ProductCategory $productCategory)
     {
         //
