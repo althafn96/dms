@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use DataTables;
 use App\Product;
+use Carbon\Carbon;
+use App\StockInHand;
 use App\ProductCategory;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use DataTables;
 
 class ProductController extends Controller
 {
@@ -40,6 +42,15 @@ class ProductController extends Controller
                 ->addColumn('supplier', function ($product) {
                     return $product->fname . ' ' . $product->lname;
                 })
+                ->addColumn('last_stock_update', function ($product) {
+                    $last_stock = StockInHand::where('product_id', $product->id)->orderBy('id', 'DESC')->first();
+
+                    if ($last_stock == '' || $last_stock == null) {
+                        return '';
+                    }
+
+                    return Carbon::createFromFormat('Y-m-d H:i:s', $last_stock->created_at)->toDateString();
+                })
                 ->addColumn('action', function ($product) {
                     return '';
                 })
@@ -66,7 +77,9 @@ class ProductController extends Controller
 
         $product->title               = $request->title;
         $product->product_category_id = $request->category;
+        $product->price               = $request->price;
         $product->supplier_id         = $request->supplier;
+        $product->is_available        = '0';
 
         if ($product->save()) {
             return response()->json([
@@ -105,6 +118,7 @@ class ProductController extends Controller
 
         $product->title               = $request->title;
         $product->product_category_id = $request->category;
+        $product->price               = $request->price;
         $product->supplier_id         = $request->supplier;
 
         if ($product->save()) {

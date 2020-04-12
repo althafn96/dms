@@ -115,18 +115,18 @@
                                                     <div class="col-xl-12">
                                                         <div class="kt-section__body">
                                                             <div class="row">
-                                                                <div class="col-md-12">
+                                                                <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label>Product Name *</label>
                                                                         <input type="text" class="form-control" name="title" placeholder="Enter Product Name">
                                                                     </div>
                                                                 </div>
-                                                                {{-- <div class="col-md-6">
+                                                                <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label>Price (Rs) *</label> 
                                                                         <input type="text" class="form-control" name="price" placeholder="Enter Price">
                                                                     </div>
-                                                                </div> --}}
+                                                                </div>
                                                                 <div class="col-md-6">
                                                                     <div id="category_field" data-url="{{ url('product-categories/fetch-product-categories') }}" class="form-group">
                                                                         <label>Category</label>

@@ -40,9 +40,12 @@ Route::middleware('auth')->group(function () {
 
     Route::post('product-categories', 'ProductCategoryController@store');
 
+    Route::get('products/{product}/stock-in-hand', 'StockInHandController@index');
+
     Route::resource('suppliers', 'SupplierController');
     Route::resource('couriers', 'CourierController');
     Route::resource('products', 'ProductController');
+    Route::resource('stock-in-hand', 'StockInHandController');
     Route::post('/logout', 'LoginController@logout')->name('logout');
 
 

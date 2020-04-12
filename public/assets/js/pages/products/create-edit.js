@@ -39,10 +39,10 @@ var ProductAdd = (function () {
                 title: {
                     required: true,
                 },
-                // price: {
-                //     required: true,
-                //     number: true,
-                // },
+                price: {
+                    required: true,
+                    number: true,
+                },
                 supplier: {
                     required: true,
                 },
@@ -271,10 +271,10 @@ $("#store-product-btn").click(function () {
             title: {
                 required: true,
             },
-            // price: {
-            //     required: true,
-            //     number: true,
-            // },
+            price: {
+                required: true,
+                number: true,
+            },
             supplier: {
                 required: true,
             },
@@ -299,10 +299,10 @@ $("#update-product-btn").click(function () {
             title: {
                 required: true,
             },
-            // price: {
-            //     required: true,
-            //     number: true,
-            // },
+            price: {
+                required: true,
+                number: true,
+            },
             supplier: {
                 required: true,
             },

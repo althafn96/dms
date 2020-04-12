@@ -51,10 +51,10 @@
                         <span class="kt-menu__link-text">Dashboard</span>
                     </a>
                 </li>
-                <li class="kt-menu__section ">
+                {{-- <li class="kt-menu__section ">
                     <h4 class="kt-menu__section-text">Custom</h4>
                     <i class="kt-menu__section-icon flaticon-more-v2"></i>
-                </li>
+                </li> --}}
                 <li class="kt-menu__item  {{ $title['menu'] == 'Suppliers' ? 'kt-menu__item--active' : ''  }}" aria-haspopup="true">
                     <a href="{{ route('suppliers.index') }}" class="kt-menu__link ">
                         <span class="kt-menu__link-icon">
